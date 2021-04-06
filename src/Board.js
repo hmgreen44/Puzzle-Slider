@@ -20,7 +20,7 @@ class Board extends React.Component {
       newBoard.push({
         id: i,
         currentPosition: i,
-        isClickable: i == 15
+        isEmpty: i == 15
       })
       console.log(newBoard)
 
@@ -28,29 +28,56 @@ class Board extends React.Component {
     this.setState({ board: newBoard })
   }
   //swapTile() {
-  //if tile is  to "empty? smart? tile"
-    //if(tile.id == 15)
+  //let currentBoard = [Board];
+  //if(tile.isEmpty id: +1 || id: -1 || id: +4 || id: -4)
+  //tile.currentP
+  //this.setState({newBoard: currentBoard})
+  //}
+
+
+  //randomizeBoard(e) {
+  //run the swapTile function a certain number of times math.random?
+  //add onClick to button and call function on click. will be event
 
   //}
 
-  //randomizeBoard() {
-    //run the swapTile function a certain number of times math.random?
-    //add onClick to button and call function on click. will be event
+  //checkWin(){
+  //this would be ran at the end of each swapTile function in order to see if current position is === id
+  //if (currentPosition === tile.id) 
+    //return alert "you win";
 
-  //}
+
+  // }
+
+  // onTileClick(e) {
+  //   swapTile() 
+  //   checkWin()
+
+  // }
 
 
   render() {
     return (
       <div className="App container mt-4">
         <div className="row text-center">
-          <h1>Puzzle Slider</h1>
+          <div class="card">
+            <div class="card-body fs-1">
+              Puzzle Slider
+          </div>
+          </div>
           {this.state.board.map((tile, index) => <Tile key={index} tile={tile} />)}
         </div>
+        <div className="row text-center">
+          <button type="button" className="btn btn-secondary p-3 mt-2 fs-3">Shuffle Board</button>
+          <button type="button" className="btn btn-secondary p-3 mt-2 fs-3">New Game</button>
+        </div>
       </div>
+
+
 
     );
   }
 }
 
 export default Board;
+
