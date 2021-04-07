@@ -39,8 +39,14 @@ class Board extends React.Component {
     this.setState({ emptyI: index })
   }
 
-  isValidMove(clickedIndex) {
-    return true;
+  isValidMove(index) {
+    if (condition) {
+      return true;
+    } else if (condition) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   tileClicked(index) {
@@ -48,11 +54,10 @@ class Board extends React.Component {
       this.swapTile(index);
     }
   }
-  //randomizeBoard(e) {
-  //run the swapTile function a certain number of times math.random?
-  //add onClick to button and call function on click. will be event
+  shuffleBoard(e) {
+  
 
-  //}
+  }
 
   //checkWin(){
   //this would be ran at the end of each swapTile function in order to see if current position is === id
@@ -81,7 +86,7 @@ class Board extends React.Component {
           {this.state.board.map((tile, index) => <Tile key={index} tile={tile} index={index} tileClicked = {this.tileClicked}/>)}
         </div>
         <div className="row text-center">
-          <button type="button" className="btn btn-secondary p-3 mt-2 fs-3">Shuffle Board</button>
+          <button type="button" className="btn btn-secondary p-3 mt-2 fs-3" onClick={this.shuffleBoard} >Shuffle Board</button>
         </div>
       </div>
 
