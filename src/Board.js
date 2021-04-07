@@ -5,8 +5,10 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: []
+      board: [],
+      emptyI: 0
     }
+    this.tileClicked = this.tileClicked.bind(this);
 
   }
   componentDidMount() {
@@ -19,22 +21,33 @@ class Board extends React.Component {
     for (let i = 0; i < 16; i++) {
       newBoard.push({
         id: i,
-        currentPosition: i,
         isEmpty: i == 15
       })
       console.log(newBoard)
 
     }
     this.setState({ board: newBoard })
+    this.setState({ emptyI: 15 })
   }
-  //swapTile() {
-  //let currentBoard = [Board];
-  //if(tile.isEmpty id: +1 || id: -1 || id: +4 || id: -4)
-  //tile.currentP
-  //this.setState({newBoard: currentBoard})
-  //}
+  swapTile(index) {
+    let board = this.state.board;
+    let emptyI = this.state.emptyI
+    let temp = board[index];
+    board[index] = board[emptyI];
+    board[emptyI] = temp;
+    this.setState({ board })
+    this.setState({ emptyI: index })
+  }
 
+  isValidMove(clickedIndex) {
+    return true;
+  }
 
+  tileClicked(index) {
+    if (this.isValidMove(index)) {
+      this.swapTile(index);
+    }
+  }
   //randomizeBoard(e) {
   //run the swapTile function a certain number of times math.random?
   //add onClick to button and call function on click. will be event
@@ -44,7 +57,7 @@ class Board extends React.Component {
   //checkWin(){
   //this would be ran at the end of each swapTile function in order to see if current position is === id
   //if (currentPosition === tile.id) 
-    //return alert "you win";
+  //return alert "you win";
 
 
   // }
@@ -60,16 +73,15 @@ class Board extends React.Component {
     return (
       <div className="App container mt-4">
         <div className="row text-center">
-          <div class="card">
-            <div class="card-body fs-1">
+          <div className="card">
+            <div className="card-body fs-1">
               Puzzle Slider
           </div>
           </div>
-          {this.state.board.map((tile, index) => <Tile key={index} tile={tile} />)}
+          {this.state.board.map((tile, index) => <Tile key={index} tile={tile} index={index} tileClicked = {this.tileClicked}/>)}
         </div>
         <div className="row text-center">
           <button type="button" className="btn btn-secondary p-3 mt-2 fs-3">Shuffle Board</button>
-          <button type="button" className="btn btn-secondary p-3 mt-2 fs-3">New Game</button>
         </div>
       </div>
 
