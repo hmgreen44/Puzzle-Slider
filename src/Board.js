@@ -9,6 +9,7 @@ class Board extends React.Component {
       emptyI: 0
     }
     this.tileClicked = this.tileClicked.bind(this);
+    this.shuffleBoard = this.shuffleBoard.bind(this);
 
   }
   componentDidMount() {
@@ -21,7 +22,7 @@ class Board extends React.Component {
     for (let i = 0; i < 16; i++) {
       newBoard.push({
         id: i,
-        isEmpty: i == 15
+        emptyI: i == 15
       })
       console.log(newBoard)
 
@@ -37,41 +38,45 @@ class Board extends React.Component {
     board[emptyI] = temp;
     this.setState({ board })
     this.setState({ emptyI: index })
+
   }
 
   isValidMove(index) {
-    if (condition) {
+    // if (condition) {
       return true;
-    } else if (condition) {
-      return true;
-    } else {
-      return false;
-    }
+    // } else if (condition) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   tileClicked(index) {
     if (this.isValidMove(index)) {
       this.swapTile(index);
     }
-  }
-  shuffleBoard(e) {
-  
-
+    this.checkWin()
   }
 
-  //checkWin(){
-  //this would be ran at the end of each swapTile function in order to see if current position is === id
-  //if (currentPosition === tile.id) 
-  //return alert "you win";
+  shuffleBoard() {
+    let randomNumber = Math.floor((Math.random() * 20));
+    for (let count = 0; count < randomNumber; count++) {
+      this.swapTile()
+    }
+    console.log(randomNumber)
+
+  }
+
+  checkWin() {
+
+    if (tiles[i] > tiles[i + 1]) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
 
-  // }
-
-  // onTileClick(e) {
-  //   swapTile() 
-  //   checkWin()
-
-  // }
 
 
   render() {
@@ -83,7 +88,7 @@ class Board extends React.Component {
               Puzzle Slider
           </div>
           </div>
-          {this.state.board.map((tile, index) => <Tile key={index} tile={tile} index={index} tileClicked = {this.tileClicked}/>)}
+          {this.state.board.map((tile, index) => <Tile key={index} tile={tile} index={index} tileClicked={this.tileClicked} />)}
         </div>
         <div className="row text-center">
           <button type="button" className="btn btn-secondary p-3 mt-2 fs-3" onClick={this.shuffleBoard} >Shuffle Board</button>
